@@ -1,0 +1,10 @@
+:myTask
+myTask doFirst call two
+myTask doFirst call one
+myTask main execution block
+myTask doLast
+myTask more main execution block
+
+BUILD SUCCESSFUL
+
+Total time: 1.585 secs

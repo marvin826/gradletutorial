@@ -1,0 +1,22 @@
+
+task myTask
+
+myTask << {
+	println "myTask main execution block"
+}
+
+myTask.doFirst {
+	println "myTask doFirst call one"
+}
+
+myTask.doFirst {
+	println "myTask doFirst call two"
+}
+
+myTask.doLast {
+	println "myTask doLast"
+}
+
+myTask << {
+	println "myTask more main execution block"
+}

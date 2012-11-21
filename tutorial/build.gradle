@@ -1,8 +1,8 @@
-#
-# Sample gradle build configuration file
-# showing the simple commands/configurations
-# available
-#
+//
+// Sample gradle build configuration file
+// showing the simple commands/configurations
+// available
+//
 
 task myTask
 
