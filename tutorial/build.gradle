@@ -1,0 +1,104 @@
+#
+# Sample gradle build configuration file
+# showing the simple commands/configurations
+# available
+#
+
+task myTask
+
+// declare a configuration block
+myTask {
+	// put some configuration here
+	// we can setup variables and data structures here
+	println 'configuration block of myTask'
+}
+
+// doFirst task is called before the main execution block is 
+// called
+myTask.doFirst {
+	println 'myTask doFirst'
+}
+
+// add some activities to the task to be executed
+myTask << {
+	// here are some activities to execute
+	println 'myTask execution block'
+}
+
+//doLast block is executed after the main execution block is
+// called
+myTask.doLast {
+	println 'myTask doLast'
+}
+
+// add some other activities that are in a separate block
+myTask << {
+	// here are some more activities to execute
+	println 'myTask second block of activities'
+}
+
+myTask.doLast {
+	println 'myTask A second doLast call'
+}
+// declare a second task that will be dependent on the first task
+task myDependentTask
+
+// declare that myDependentTask depends on myTask
+myDependentTask {
+	dependsOn myTask
+}
+
+// execution block of myDependentTask
+myDependentTask << {
+	println 'myDependentTask execution block'
+}
+
+myDependentTask.doFirst {
+	println 'myDependentTask.doFirst'
+}
+
+myDependentTask.doLast {
+	println 'myDependentTask.doLast'
+}
+
+// You can also do: myDependentTask.dependsOn myTask 
+// OR               task myDependentTask(dependsOn: myTask)
+//
+// A task can depend on one or more other tasks:
+// dependsOn taskOne, taskTwo
+//
+// OR
+// 
+// task sample {
+//	dependsOn tasksOne, taskTwo
+//}
+
+task one {
+	println 'task one configuration'
+}
+
+one << {
+	println 'task one execution'
+}
+
+task two {
+	println 'task two configuration'
+}
+
+two << {
+	println 'task two execution'
+}
+
+task three {
+	println 'task three configuration'
+	dependsOn one, two
+}
+
+three << {
+	println 'task three execution'
+}
+
+// NOTE: If you run 'gradle tasks', myDependentTask shows up, but
+//       myTask does not. This seems like a bug, as myTask can be
+//       called all by itself. The output should show both tasks
+//       and show the myDependentTask is dependent on myTask

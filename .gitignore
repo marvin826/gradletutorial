@@ -1,0 +1,10 @@
+
+# ignore the gradle stuff
+gradle-1.2/
+gradle-1.2-all.zip
+.gradle/
+
+# ignore our scratch directories
+poems
+poetry
+tasks
