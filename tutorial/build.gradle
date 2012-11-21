@@ -102,3 +102,25 @@ three << {
 //       myTask does not. This seems like a bug, as myTask can be
 //       called all by itself. The output should show both tasks
 //       and show the myDependentTask is dependent on myTask
+
+// gradle also supports conditional execution
+// NOTE: you can set system properties during the call to gradle:
+//       gradle -Dexecute.mytask=true myDependentTask
+//
+//       In this example, myTask will be skipped unless 
+//       execute.mytask is set to true
+myTask.onlyIf {
+	System.properties['execute.mytask'] == 'true'
+}
+
+// didWork variable is set by each task. This variable can be checked before 
+// running something else
+task dumpResults(dependsOn: myDependentTask) << {
+	if(tasks.myDependentTask.didWork){
+		println "dumpResults: myDependentTask worked!"
+	}
+}
+
+// you can also disable a task
+dumpResults.enabled = false
+
