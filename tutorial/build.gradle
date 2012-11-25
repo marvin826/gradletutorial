@@ -4,13 +4,22 @@
 // available
 //
 
-task myTask
+task myTask (description: "Simple task to demonstrate Gradle")
 
 // declare a configuration block
 myTask {
 	// put some configuration here
 	// we can setup variables and data structures here
 	println 'configuration block of myTask'
+
+	// declare a variable that we can use
+	// later
+	information = "*A variable set in myTask*"
+
+	// NOTE: setting a variable in the configuration section
+	//       allows dependent tasks to use the variable.
+	//       setting a variable anywhere else, the variable
+	// 	 	 does not seem available to other tasks. (v 1.2)
 }
 
 // doFirst task is called before the main execution block is 
@@ -55,6 +64,8 @@ myDependentTask << {
 
 myDependentTask.doFirst {
 	println 'myDependentTask.doFirst'
+
+	println "Variable from myTask: ${myTask.information}"
 }
 
 myDependentTask.doLast {

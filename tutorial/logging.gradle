@@ -1,0 +1,38 @@
+task logLevel << {
+	def levels = [ 'DEBUG',
+	               'INFO',
+	               'LIFECYCLE',
+	               'QUIET',
+	               'WARN',
+	               'ERROR']
+	levels.each { level->
+	    logging.level = level
+	    def logMessage = "SETTING LogLevel=${level}"
+	    logger.error logMessage
+	    logger.error '-' * logMessage.size()
+	    logger.debug 'DEBUG ENABLED'
+	    logger.info 'INFO ENABLED'
+	    logger.lifecycle 'LIFECYCLE ENABLED'
+	    logger.warn 'WARN ENABLED'
+	    logger.quiet 'QUIET ENABLED'
+	    logger.error 'ERROR ENABLED'
+	    println 'THIS IS println OUTPUT'
+	    logger.error ' '
+	}
+}
+
+task testLoggingFlag << {
+
+	if(System.properties["logging.level"]){
+		logging.level = System.properties["logging.level"]
+	} else {
+		logging.level = "DEBUG"
+	}
+
+	logger.error "HERE IS A LOG ERROR"
+	logger.debug "HERE IS A LOG DEBUG"
+	logger.info "HERE IS A LOG INFO"
+	logger.lifecycle "HERE IS A LOG LIFECYCLE"
+	logger.warn "HERE IS A LOG WARN"
+	logger.quiet "HERE IS A LOG QUIET"
+}
